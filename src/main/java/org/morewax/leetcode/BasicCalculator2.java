@@ -19,7 +19,7 @@ import java.util.Stack;
 
  * Created by Bing on 11/24/2015.
  */
-public class BasicCaculator2 {
+public class BasicCalculator2 {
     public int calculate(String s) {
         Stack<Character> operators = new Stack<>();
         Stack<Integer> operands = new Stack<>();
@@ -77,27 +77,27 @@ public class BasicCaculator2 {
     }
 
     public static void main(String[] args) {
-        BasicCaculator2 basicCaculator2 = new BasicCaculator2();
+        BasicCalculator2 basicCalculator2 = new BasicCalculator2();
         int result;
 
         String s1 = "3+2*2";
-        result = basicCaculator2.calculate(s1);
+        result = basicCalculator2.calculate(s1);
         System.out.println(s1 + " = " + result);
 
         String s2 = "3/2";
-        result = basicCaculator2.calculate(s2);
+        result = basicCalculator2.calculate(s2);
         System.out.println(s2 + " = " + result);
 
         String s3 = "3+5 / 2 ";
-        result = basicCaculator2.calculate(s3);
+        result = basicCalculator2.calculate(s3);
         System.out.println(s3 + " = " + result);
 
         String s4 = "1+3*5 / 2 ";
-        result = basicCaculator2.calculate(s4);
+        result = basicCalculator2.calculate(s4);
         System.out.println(s4 + " = " + result);
 
         String s5 = "1*2-3/4+5*6-7*8+9/10";
-        result = basicCaculator2.calculate(s5);
+        result = basicCalculator2.calculate(s5);
         System.out.println(s5 + " = " + result);
     }
 }

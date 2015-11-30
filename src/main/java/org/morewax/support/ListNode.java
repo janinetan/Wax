@@ -1,4 +1,4 @@
-package org.morewax.leetcode.support;
+package org.morewax.support;
 
 /**
  * Created by Bing on 11/27/2015.

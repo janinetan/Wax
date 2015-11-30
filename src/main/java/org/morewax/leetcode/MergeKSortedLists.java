@@ -1,6 +1,6 @@
 package org.morewax.leetcode;
 
-import org.morewax.leetcode.support.ListNode;
+import org.morewax.support.ListNode;
 
 /**
  * Created by Bing on 11/27/2015.

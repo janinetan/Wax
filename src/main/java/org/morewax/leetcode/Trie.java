@@ -25,7 +25,7 @@ public class Trie {
             node = node.children[c-'a'];
         }
 
-        node.item = word;
+        node.isWord = true;
     }
 
     // Returns if the word is in the trie.
@@ -40,7 +40,7 @@ public class Trie {
             node = node.children[c-'a'];
         }
 
-        return node.item.equals(word);
+        return node.isWord;
     }
 
     // Returns if there is any word in the trie

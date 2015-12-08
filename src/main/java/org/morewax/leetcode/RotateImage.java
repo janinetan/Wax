@@ -1,5 +1,6 @@
 package org.morewax.leetcode;
 
+import org.apache.commons.lang3.tuple.MutablePair;
 import org.morewax.support.Utils;
 
 /**
@@ -63,6 +64,48 @@ public class RotateImage {
         System.out.println("");
     }
 
+    public void printMatrixInSpiral2(int[][] matrix) {
+        int ySteps = matrix.length;
+        int xSteps = matrix[0].length;
+        MutablePair<Integer, Integer> direction = MutablePair.of(0, 1); // going right;
+        MutablePair<Integer, Integer> position = MutablePair.of(0, 0);
+        int steps = xSteps;
+
+        while (true) {
+            System.out.print(matrix[position.getLeft()][position.getRight()] + " ");
+            --steps;
+
+            if (steps == 0) {
+                if (direction.getRight() == 1) { // current: going right; next: going down
+                    direction.setLeft(1);
+                    direction.setRight(0);
+                    steps = --ySteps;
+                } else if (direction.getRight() == -1) { // current: going left: next: going up
+                    direction.setLeft(-1);
+                    direction.setRight(0);
+                    steps = --ySteps;
+                } else if (direction.getLeft() == 1) { // current: going down; next: going left
+                    direction.setLeft(0);
+                    direction.setRight(-1);
+                    steps = --xSteps;
+                } else if (direction.getLeft() == -1) { // current: going up; next: going right
+                    direction.setLeft(0);
+                    direction.setRight(1);
+                    steps = --xSteps;
+                }
+            }
+
+            if (steps == 0) {
+                break;
+            }
+
+            position.setLeft(position.getLeft() + direction.getLeft());
+            position.setRight(position.getRight() + direction.getRight());
+        }
+
+        System.out.println("");
+    }
+
     public void printMatrixInSpiral(int[][] matrix) {
         int rows = matrix.length;
         int cols = matrix[0].length;
@@ -119,6 +162,7 @@ public class RotateImage {
                 {3, 4}
         };
         s.printMatrixInSpiral(m1);
+        s.printMatrixInSpiral2(m1);
         //s.rotate(m1);
 
         int[][] m2 = new int[][] {
@@ -130,6 +174,7 @@ public class RotateImage {
         };
         //s.rotate(m2);
         s.printMatrixInSpiral(m2);
+        s.printMatrixInSpiral2(m2);
 
         int[][] m3 = new int[][] {
                 {1,  2,  3,  4},
@@ -139,12 +184,14 @@ public class RotateImage {
         };
         //s.rotate(m3);
         s.printMatrixInSpiral(m3);
+        s.printMatrixInSpiral2(m3);
 
         int[][] m4 = new int[][]{
                 {1, 2, 3},
                 {4, 5, 6}
         };
         s.printMatrixInSpiral(m4);
+        s.printMatrixInSpiral2(m4);
 
         int[][] m5 = new int[][]{
                 {1, 2, 3},
@@ -152,6 +199,7 @@ public class RotateImage {
                 {7, 8, 9}
         };
         s.printMatrixInSpiral(m5);
+        s.printMatrixInSpiral2(m5);
 
         int[][] m6 = new int[][]{
                 {1},
@@ -160,5 +208,6 @@ public class RotateImage {
                 {4}
         };
         s.printMatrixInSpiral(m6);
+        s.printMatrixInSpiral2(m6);
     }
 }

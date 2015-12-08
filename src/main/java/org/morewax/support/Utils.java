@@ -18,4 +18,20 @@ public class Utils {
         });
         System.out.println("]");
     }
+
+    public static void printMatrix(int[][] matrix) {
+        int rows = matrix.length;
+        int cols = matrix[0].length;
+
+        for (int i = 0; i < rows; ++i) {
+            int[] counter = new int[1];
+            for (int j = 0; j < cols; ++j) {
+                if (counter[0]++ != 0) {
+                    System.out.print(", ");
+                }
+                System.out.print(matrix[i][j]);
+            }
+            System.out.println("");
+        }
+    }
 }

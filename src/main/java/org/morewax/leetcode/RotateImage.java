@@ -4,7 +4,7 @@ import org.morewax.support.Utils;
 
 /**
  * Problem
- * Rotate image
+ * Rotate image (https://leetcode.com/problems/rotate-image/)
  *
  * You are given an n x n 2D matrix representing an image.
 
@@ -45,7 +45,7 @@ public class RotateImage {
                 int temp = matrix[layer][i];
 
                 // move left to top
-                matrix[i][layer] = matrix[n-1-i][layer];
+                matrix[layer][i] = matrix[n-1-i][layer];
 
                 // move bottom to left
                 matrix[n-1-i][layer] = matrix[n-1-layer][n-1-i];
@@ -60,6 +60,7 @@ public class RotateImage {
 
         System.out.println("After rotation");
         Utils.printMatrix(matrix);
+        System.out.println("");
     }
 
     public static void main(String[] args) {
@@ -79,5 +80,12 @@ public class RotateImage {
                 {21, 22, 23, 24, 25}
         };
         s.rotate(m2);
+
+        int[][] m3 = new int[][] {
+                {1, 2, 3},
+                {4, 5, 6},
+                {7, 8, 9}
+        };
+        s.rotate(m3);
     }
 }

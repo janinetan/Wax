@@ -63,14 +63,63 @@ public class RotateImage {
         System.out.println("");
     }
 
+    public void printMatrixInSpiral(int[][] matrix) {
+        int rows = matrix.length;
+        int cols = matrix[0].length;
+        int layer = 0;
+
+        while (rows > 0 && cols > 0) {
+            if (rows == 1) {
+                for (int i = 0; i < cols; ++i) {
+                    System.out.print(matrix[layer][layer+i] + " ");
+                }
+                break;
+            }
+
+            if (cols == 1) {
+                for (int i = 0; i < rows; ++i) {
+                    System.out.print(matrix[layer+i][layer] + " ");
+                }
+                break;
+            }
+
+            // top (left -> right)
+            for (int i = 0; i < cols-1; ++i) {
+                System.out.print(matrix[layer][layer+i] + " ");
+            }
+
+            // right (top -> bottom)
+            for (int i = 0; i < rows-1; ++i) {
+                System.out.print(matrix[layer+i][cols+layer-1] + " ");
+            }
+
+            // bottom (right->left)
+            for (int i = 0; i < cols-1; ++i) {
+                System.out.print(matrix[rows+layer-1][cols+layer-1-i] + " ");
+            }
+
+            // left (bottom->top)
+            for (int i = 0; i < rows-1; ++i) {
+                System.out.print(matrix[rows+layer-1-i][layer] + " ");
+            }
+
+            rows -= 2;
+            cols -= 2;
+            ++layer;
+        }
+        System.out.println("");
+    }
+
     public static void main(String[] args) {
         RotateImage s = new RotateImage();
+
 
         int[][] m1 = new int[][] {
                 {1, 2},
                 {3, 4}
         };
-        s.rotate(m1);
+        s.printMatrixInSpiral(m1);
+        //s.rotate(m1);
 
         int[][] m2 = new int[][] {
                 {1, 2, 3, 4, 5},
@@ -79,13 +128,37 @@ public class RotateImage {
                 {16, 17, 18, 19, 20},
                 {21, 22, 23, 24, 25}
         };
-        s.rotate(m2);
+        //s.rotate(m2);
+        s.printMatrixInSpiral(m2);
 
         int[][] m3 = new int[][] {
+                {1,  2,  3,  4},
+                {5,  6,  7,  8},
+                {9, 10, 11, 12},
+                {13, 14, 15, 16}
+        };
+        //s.rotate(m3);
+        s.printMatrixInSpiral(m3);
+
+        int[][] m4 = new int[][]{
+                {1, 2, 3},
+                {4, 5, 6}
+        };
+        s.printMatrixInSpiral(m4);
+
+        int[][] m5 = new int[][]{
                 {1, 2, 3},
                 {4, 5, 6},
                 {7, 8, 9}
         };
-        s.rotate(m3);
+        s.printMatrixInSpiral(m5);
+
+        int[][] m6 = new int[][]{
+                {1},
+                {2},
+                {3},
+                {4}
+        };
+        s.printMatrixInSpiral(m6);
     }
 }

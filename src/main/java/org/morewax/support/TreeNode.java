@@ -7,6 +7,7 @@ public class TreeNode {
     public int val;
     public TreeNode left;
     public TreeNode right;
+    public TreeNode parent;
 
     public TreeNode(int x) {
         this.val = x;
@@ -34,7 +35,13 @@ public class TreeNode {
         int mid = start + (end-start)/2;
         TreeNode root = new TreeNode(A[mid]);
         root.left = buildTreeHelper(A, start, mid-1);
+        if (root.left != null) {
+            root.left.parent = root;
+        }
         root.right = buildTreeHelper(A, mid+1, end);
+        if (root.right != null) {
+            root.right.parent = root;
+        }
 
         return root;
     }

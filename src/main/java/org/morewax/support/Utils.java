@@ -34,4 +34,17 @@ public class Utils {
             System.out.println("");
         }
     }
+
+    public static void printArray(int[] A, int count) {
+        System.out.print("[");
+
+        for (int i = 0; i < count; ++i) {
+            if (i != 0) {
+                System.out.print(", ");
+            }
+            System.out.print(A[i]);
+        }
+
+        System.out.println("]");
+    }
 }

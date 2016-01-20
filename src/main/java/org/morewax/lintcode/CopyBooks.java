@@ -31,7 +31,8 @@ public class CopyBooks {
          *  1. no more books;
          *  2. no more copier
          */
-        return dfs(pages, 0, k);
+        //return dfs(pages, 0, k);
+        return dpHelper(pages, k);
     }
 
     private int dfs(int[] pages, int start, int numOfCopiers) {
@@ -56,6 +57,29 @@ public class CopyBooks {
         }
 
         return result;
+    }
+
+    private int dpHelper(int[] pages, int k) {
+        int n = pages.length;
+        k = Math.min(k, n);
+        int[][] dp = new int[k+1][n+1];
+
+        for (int i = 0; i <=n; ++i) {
+            dp[0][i] = (i == 0)? 0 : Integer.MAX_VALUE;
+        }
+
+        for (int i = 1; i <= k; ++i) {
+            for (int j = 1; j <= n; ++j) {
+                int sum = 0;
+                dp[i][j] = Integer.MAX_VALUE;
+                for (int l = 0; l < j; ++l) {
+                    sum += pages[j-1-l];
+                    dp[i][j] = Math.min(dp[i][j], Math.max(sum, dp[i-1][j-l-1]));
+                }
+            }
+        }
+
+        return dp[k][n];
     }
 
     public static void main(String[] args) {

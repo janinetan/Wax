@@ -15,6 +15,7 @@ package org.morewax.lintcode;
  *   to copy book 3. )
  *  Challenge
  *      Could you do this in O(n*k) time ?
+ *  The binary search version is inspired by this topcoder article: https://www.topcoder.com/community/data-science/data-science-tutorials/binary-search/
  * Created by byuan on 1/19/16.
  */
 public class CopyBooks {
@@ -32,7 +33,8 @@ public class CopyBooks {
          *  2. no more copier
          */
         //return dfs(pages, 0, k);
-        return dpHelper(pages, k);
+        //return dpHelper(pages, k);
+        return binarySearch(pages, k);
     }
 
     private int dfs(int[] pages, int start, int numOfCopiers) {
@@ -80,6 +82,43 @@ public class CopyBooks {
         }
 
         return dp[k][n];
+    }
+
+    private int binarySearch(int[] pages, int k) {
+        long maxPages = 0;
+        long totalPages = 0;
+
+        for (int i = 0; i < pages.length; ++i) {
+            maxPages = Math.max(maxPages, (long)pages[i]);
+            totalPages += (long)pages[i];
+        }
+
+        long l = maxPages;
+        long h = totalPages;
+
+        while (l < h) {
+            long m = l + (h-l)/2;
+
+            long sum = 0;
+            int requiredWorkers = 1;
+
+            for (int i = 0; i < pages.length; ++i) {
+                if ((sum+pages[i]) <= m) {
+                    sum += pages[i];
+                } else {
+                    ++requiredWorkers;
+                    sum = pages[i];
+                }
+            }
+
+            if (requiredWorkers <= k) {
+                h = m;
+            } else {
+                l = m+1;
+            }
+        }
+
+        return (int)l;
     }
 
     public static void main(String[] args) {

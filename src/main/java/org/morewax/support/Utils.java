@@ -48,6 +48,20 @@ public class Utils {
         System.out.println("]");
     }
 
+    public static void printArray(String[] A, int count) {
+        System.out.print("[");
+
+        if (count == -1) count = A.length;
+        for (int i = 0; i < count; ++i) {
+            if (i != 0) {
+                System.out.print(", ");
+            }
+            System.out.print(A[i]);
+        }
+
+        System.out.println("]");
+    }
+
     /**
      * It gets median.
      * If the length is even, then both floor and ceiling elements will be returned with floor element at index 0 of

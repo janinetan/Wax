@@ -38,6 +38,7 @@ public class Utils {
     public static void printArray(int[] A, int count) {
         System.out.print("[");
 
+        if (count == -1) count = A.length;
         for (int i = 0; i < count; ++i) {
             if (i != 0) {
                 System.out.print(", ");

@@ -84,12 +84,70 @@ public class VerifyBinaryTreePreorder {
         return result;
     }
 
+    public boolean isValidSerialization2(String preorder) {
+        boolean result = true;
+        int count = 0;
+
+        String[] values = preorder.split(",");
+        if (values.length == 0) return false;
+
+        if (isNumber(values[0])) {
+            count += 2;
+        }
+
+        for (int i = 1; i < values.length; ++i) {
+            if (isNull(values[i])) {
+                if (count == 0) {
+                    result = false;
+                    break;
+                } else {
+                    --count;
+                }
+            } else if (isNumber(values[i])) {
+                if (count == 0) {
+                    result = false;
+                    break;
+                } else {
+                    --count;
+                }
+                count += 2;
+            } else {
+                result = false;
+                break;
+            }
+        }
+
+        result = (result)? (count == 0) : result;
+
+        return result;
+    }
+
+    private boolean isNumber(final String str) {
+        boolean result = true;
+
+        try {
+            Integer.parseInt(str);
+        } catch (NumberFormatException e) {
+            result = false;
+        }
+
+        return result;
+    }
+
+    private boolean isNull(final String str) {
+        return "#".equals(str);
+    }
+
     public static void main(String[] args) {
         final VerifyBinaryTreePreorder s = new VerifyBinaryTreePreorder();
 
         System.out.println(s.isValidSerialization("1,#"));
+        System.out.println(s.isValidSerialization2("1,#"));
         System.out.println(s.isValidSerialization("9,#,#,1"));
+        System.out.println(s.isValidSerialization2("9,#,#,1"));
         System.out.println(s.isValidSerialization("9,3,4,#,#,1,#,#,2,#,6,#,#"));
+        System.out.println(s.isValidSerialization2("9,3,4,#,#,1,#,#,2,#,6,#,#"));
         System.out.println(s.isValidSerialization("9,3,4,#,#,1,#,#,#,2,#,6,#,#"));
+        System.out.println(s.isValidSerialization2("9,3,4,#,#,1,#,#,#,2,#,6,#,#"));
     }
 }

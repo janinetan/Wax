@@ -1,5 +1,7 @@
 package org.morewax.support;
 
+import java.util.*;
+
 /**
  * Created by Bing on 11/28/2015.
  */
@@ -44,5 +46,57 @@ public class TreeNode {
         }
 
         return root;
+    }
+
+    public static TreeNode from(List<String> nodes) {
+        if (nodes.isEmpty()) return null;
+
+        if (nodes.get(0).equals("#")) return null;
+
+        TreeNode root = new TreeNode(Integer.parseInt(nodes.get(0)));
+        Queue<TreeNode> q = new LinkedList<>();
+        q.offer(root);
+
+        for (int i = 1; i < nodes.size(); i += 2) {
+            TreeNode node = q.poll();
+            if (!nodes.get(i).equals("#")) {
+                node.left = new TreeNode(Integer.parseInt(nodes.get(i)));
+                q.offer(node.left);
+            }
+
+            if (!nodes.get(i+1).equals("#")) {
+                node.right = new TreeNode(Integer.parseInt(nodes.get(i+1)));
+                q.offer(node.right);
+            }
+        }
+
+        return root;
+    }
+
+    public static List<String> to(TreeNode root) {
+        List<String> result = new ArrayList<>();
+
+        if (root == null) {
+            result.add("#");
+            return result;
+        }
+
+        Queue<TreeNode> q = new LinkedList<>();
+        q.offer(root);
+
+        while (!q.isEmpty()) {
+            TreeNode n = q.poll();
+
+            if (n != null) {
+                result.add(((Integer) n.val).toString());
+
+                q.offer(n.left);
+                q.offer(n.right);
+            } else {
+                result.add("#");
+            }
+        }
+
+        return result;
     }
 }
